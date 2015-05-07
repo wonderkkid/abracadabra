@@ -1,37 +1,54 @@
 package com.widget.smsreceivewidget;
 
-import com.widget.smsreceivewidget.R;
-
+import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
+
+@SuppressLint("ShowToast")
 public class SmsReceiveWidget extends AppWidgetProvider {
 	
-	@Override
-	public void onDeleted(Context context, int[] appWidgetIds) {
-		super.onDeleted(context, appWidgetIds);
-	}
-
-	@Override
-	public void onDisabled(Context context) {
-		super.onDisabled(context);
-	}
-
-	@Override
-	public void onEnabled(Context context) {
-		super.onEnabled(context);
-	}
-
-	@Override
-	public void onReceive(Context context, Intent intent) {
-		super.onReceive(context, intent);
-	}
+	  private static final String TAG = "HelloWidgetProvider";
+	  private static final int WIDGET_UPDATE_INTERVAL = 500000;
+	  private static PendingIntent mSender;
+	  private static AlarmManager mManager;
+	  
+	  @Override
+//	  public void onReceive(Context context, Intent intent)
+//	  {
+//	    super.onReceive(context, intent);
+//	 
+//	    String action = intent.getAction();
+//	    // 위젯 업데이트 인텐트를 수신했을 때
+//	    if(action.equals("android.appwidget.action.APPWIDGET_UPDATE"))
+//	    {
+//	      Log.w(TAG, "android.appwidget.action.APPWIDGET_UPDATE");
+//	      removePreviousAlarm();
+//	 
+//	      long firstTime = System.currentTimeMillis() + WIDGET_UPDATE_INTERVAL;
+//	      mSender = PendingIntent.getBroadcast(context, 0, intent, 0);
+//	      mManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+//	      mManager.set(AlarmManager.RTC, firstTime, mSender);
+//	    }
+//	    // 위젯 제거 인텐트를 수신했을 때
+//	    else if(action.equals("android.appwidget.action.APPWIDGET_DISABLED"))
+//	    {
+//	      Log.w(TAG, "android.appwidget.action.APPWIDGET_DISABLED");
+//	      removePreviousAlarm();
+//	    }
+//	  }
 	
+	
+	@SuppressLint("ShowToast")
 	public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds){
 		super.onUpdate(context, appWidgetManager, appWidgetIds);
 		
@@ -47,9 +64,35 @@ public class SmsReceiveWidget extends AppWidgetProvider {
 			PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 			
 			RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.activity_main);
+			
+			SharedPreferences prefs = context.getSharedPreferences("PrefName", 0);
+			String text = prefs.getString("SMSMSG", "");
+			
+			
+			
+			if (text == ""){
+				views.setTextViewText(R.id.smsWidget, "Test message");
+				Toast.makeText(context, "Test message", 10);
+			}else{
+				views.setTextViewText(R.id.smsWidget, text);
+				Toast.makeText(context, text, 10);
+			}			
+
 			appWidgetManager.updateAppWidget(appWidgetId,  views);					
 			
 		}
 		
-	}	
+	}
+	
+	  /**
+	   * 예약되어있는 알람을 취소합니다.
+	   */
+	  public void removePreviousAlarm()
+	  {
+	    if(mManager != null && mSender != null)
+	    {
+	      mSender.cancel();
+	      mManager.cancel(mSender);
+	    }
+	  }
 }

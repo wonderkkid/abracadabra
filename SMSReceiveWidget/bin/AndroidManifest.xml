@@ -7,14 +7,17 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
-    
+
+    <!-- SMS receive permission -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <!--  Widget receiver -->
         <receiver
             android:name="SmsReceiveWidget"
             android:label="@string/app_name" >
@@ -24,6 +27,13 @@
             <meta-data android:name="android.appwidget.provider"
 				android:resource="@xml/received_sms_info" />
         </receiver>
+        
+        <!-- SMS receiver -->
+        <receiver android:name="SmsReceiver">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <activity android:name="RedirectActivity"></activity>        
     </application>
-
 </manifest>
