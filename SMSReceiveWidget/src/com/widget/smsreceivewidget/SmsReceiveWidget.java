@@ -9,9 +9,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
+
 
 
 @SuppressLint("ShowToast")
@@ -28,7 +28,7 @@ public class SmsReceiveWidget extends AppWidgetProvider {
 //	    super.onReceive(context, intent);
 //	 
 //	    String action = intent.getAction();
-//	    // À§Á¬ ¾÷µ¥ÀÌÆ® ÀÎÅÙÆ®¸¦ ¼ö½ÅÇßÀ» ¶§
+//	    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 //	    if(action.equals("android.appwidget.action.APPWIDGET_UPDATE"))
 //	    {
 //	      Log.w(TAG, "android.appwidget.action.APPWIDGET_UPDATE");
@@ -39,7 +39,7 @@ public class SmsReceiveWidget extends AppWidgetProvider {
 //	      mManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 //	      mManager.set(AlarmManager.RTC, firstTime, mSender);
 //	    }
-//	    // À§Á¬ Á¦°Å ÀÎÅÙÆ®¸¦ ¼ö½ÅÇßÀ» ¶§
+//	    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 //	    else if(action.equals("android.appwidget.action.APPWIDGET_DISABLED"))
 //	    {
 //	      Log.w(TAG, "android.appwidget.action.APPWIDGET_DISABLED");
@@ -85,7 +85,7 @@ public class SmsReceiveWidget extends AppWidgetProvider {
 	}
 	
 	  /**
-	   * ¿¹¾àµÇ¾îÀÖ´Â ¾Ë¶÷À» Ãë¼ÒÇÕ´Ï´Ù.
+	   * ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½Ö´ï¿½ ï¿½Ë¶ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.
 	   */
 	  public void removePreviousAlarm()
 	  {

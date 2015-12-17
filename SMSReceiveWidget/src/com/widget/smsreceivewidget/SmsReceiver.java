@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
 
+
 public class SmsReceiver extends BroadcastReceiver{
 	static final String logTag = "SmsReceiver";
     static final String ACTION = "android.provider.Telephony.SMS_RECEIVED";
@@ -24,13 +25,13 @@ public class SmsReceiver extends BroadcastReceiver{
                    return;
             }
            
-            String str = ""; // ÀÎÅÙÆ®¿¡ ³Ö±â À§ÇÑ ÀÓÀÇ String º¯¼ö ¼±¾ð
+            String str = ""; // ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ String ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
             //message
             SmsMessage[] smsMessages = new SmsMessage[pdusObj.length];
             for (int i = 0; i < pdusObj.length; i++) {
                    smsMessages[i] = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
-                   str = smsMessages[i].getMessageBody(); // ÀÓÀÇÀÇ String º¯¼ö¿¡°ª ³ÖÀ½
+                   str = smsMessages[i].getMessageBody(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ String ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             }           
 		
 		     intent.putExtra("smsmsg", str);		     
